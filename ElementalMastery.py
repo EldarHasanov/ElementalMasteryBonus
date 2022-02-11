@@ -1,3 +1,4 @@
+from cProfile import label
 from ipaddress import collapse_addresses
 import numpy as np
 import math as m
@@ -18,18 +19,20 @@ ShieldHPDer = lambda em: (444 * (1400 / pow((em + 1400), 2) ) )
 fig = plt.subplots()
 x = np.linspace(0, 2000, 2000)
 
-plt.plot(x, Wape(x), color = 'red')
-plt.plot(x, Over(x), color='green')
-plt.plot(x, ShieldHP(x), color='darkorange')
+plt.plot(x, Wape(x), color = 'red', label=str('First order reactions'))
+plt.plot(x, Over(x), color='green', label=str('Second order reactions'))
+plt.plot(x, ShieldHP(x), color='darkorange', label=str('Shield reactrons'))
+plt.legend ()
 
 plt.xlabel('Elemental mastery', color='gray')
 plt.ylabel('Bonus %',color='gray')
 plt.grid(True)
 
 plt.figure()
-plt.plot(x, WapeDer(x), color = 'red')
-plt.plot(x, OverDer(x), color='green')
-plt.plot(x, ShieldHPDer(x), color='darkorange')
+plt.plot(x, WapeDer(x), color = 'red', label=str('First order reactions'))
+plt.plot(x, OverDer(x), color='green', label=str('Second order reactions'))
+plt.plot(x, ShieldHPDer(x), color='darkorange', label=str('Shield reactrons'))
+plt.legend ()
 
 plt.xlabel('Elemental mastery', color='gray')
 plt.ylabel('Bonus growth',color='gray')
